@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
 {
+   // calculates the angle of the aim;
+    
     public Transform firePoint;
     public Camera cam;
     public float currentAngle;
@@ -11,6 +13,7 @@ public class PlayerAim : MonoBehaviour
     public PlayerController2D player;
 
     public Vector3 mousePos;
+    
 
 
     private void Start()
@@ -22,16 +25,19 @@ public class PlayerAim : MonoBehaviour
     {
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 lookDir = (mousePos - firePoint.position).normalized;
+
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        //currentAngle = angle; //UNCOMMENT TO SWITCH TO MOUSE CONTROLLED AIMING
+
+
+        firePoint.eulerAngles = new Vector3(0f, 0f, currentAngle);
 
     }
 
     private void FixedUpdate()
     {
-        Vector2 lookDir = (mousePos - firePoint.position).normalized;
-        
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-        currentAngle = angle;
-        firePoint.eulerAngles = new Vector3 (0f,0f,currentAngle);
+
         
         
 

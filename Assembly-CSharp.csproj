@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{7752DEF2-7DC4-3617-FB7D-ADB033127E44}</ProjectGuid>
+    <ProjectGuid>{47AD5581-DF2A-CBB3-A59B-E7FFBB60ADF1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scenes\Scripts\Player\Bullet.cs" />
     <Compile Include="Assets\Scenes\Scripts\Enemies\SeaLion\SeaLionPatrol.cs" />
     <Compile Include="Assets\Scenes\Scripts\Egg\Draft\Egg2\Evolution3.cs" />
+    <Compile Include="Assets\Timer.cs" />
     <Compile Include="Assets\Scenes\Scripts\Player\Shoot\Impact\ImpactAnimatorStates.cs" />
     <Compile Include="Assets\Scenes\Scripts\Egg\Evolution.cs" />
     <Compile Include="Assets\Scenes\Scripts\Egg\Draft\Egg0\Egg0.cs" />
@@ -112,7 +113,6 @@
     <Compile Include="Assets\Scenes\Scripts\Player\Shoot\Impact\Impact.cs" />
     <Compile Include="Assets\FishBar.cs" />
     <Compile Include="Assets\Scenes\Scripts\UI\HealthBar.cs" />
-    <Compile Include="Assets\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

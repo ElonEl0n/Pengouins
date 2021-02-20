@@ -11,12 +11,16 @@ public class AimPoint : MonoBehaviour
     //For joystick controls
     public float aimVertical;// input
     public float aimHorizontal;// input
+    public float aimAngle;
+    public float aimOffset;
     public float aimRadius;
-    Vector2 aimPos;
-    public float aimSensitivity; //check if necessary
-    public Transform player; // check if necessary
-    float playerOriginX;
-    float playerOriginY;
+    Vector2 position;
+
+    public PlayerAim playerAim;
+    public PlayerController2D player;
+   
+
+
     public Transform returnA;
     public Transform returnB;
     Transform aimReturn;
@@ -28,47 +32,47 @@ public class AimPoint : MonoBehaviour
     {
         transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
         aimReturn = returnA;
+
+        player = GetComponentInParent<PlayerController2D>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        mousePos= cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         //input joystick
 
-        aimHorizontal = Input.GetAxis("RightStickHorizontal"); //x
-        aimVertical = Input.GetAxis("RightStickVertical"); //y
+        aimHorizontal  = Input.GetAxis("RightStickHorizontal")*aimRadius; //x
+        aimVertical = Input.GetAxis("RightStickVertical")*aimRadius; //y
 
-        playerOriginX = player.transform.position.x;
-        playerOriginY = player.transform.position.y;
+        Vector2 input = new Vector2(aimHorizontal, aimVertical);
+
+        float magnitude = Mathf.Min(aimRadius, input.magnitude);
 
         
+        aimAngle = Mathf.Atan2(aimVertical, aimHorizontal) * Mathf.Rad2Deg; //ok
 
-        if(aimHorizontal>0 && aimVertical >0)
-        {
-            aimPos = new Vector2(Mathf.Sqrt((aimRadius * aimRadius - aimVertical * aimVertical)), 
-                Mathf.Sqrt((aimRadius*aimRadius - aimHorizontal*aimHorizontal)));
-            aimReturn = returnA;
+        playerAim.currentAngle = aimAngle;
 
-        }
-        if (aimHorizontal < 0 && aimVertical > 0)
+        position = new Vector2(magnitude *Mathf.Cos(aimAngle*Mathf.Deg2Rad), magnitude *Mathf.Sin(aimAngle*Mathf.Deg2Rad));
+
+
+        //switch aimReturns
+        //link with playerAim and to playerController to pass the angle and
+
+        // flip the character effectively
+
+        if (/*rb2d.velocity.x < -.01 && (facingRight) || */!(player.facingRight))
         {
-            aimPos = new Vector2(-Mathf.Sqrt((aimRadius * aimRadius - aimVertical * aimVertical)),
-                Mathf.Sqrt((aimRadius * aimRadius - aimHorizontal * aimHorizontal)));
-            aimReturn = returnB;
+
+            //add correct angle
         }
-        if (aimHorizontal < 0 && aimVertical < 0)
-        {
-            aimPos = new Vector2(-Mathf.Sqrt((aimRadius * aimRadius - aimVertical * aimVertical)),
-                -Mathf.Sqrt((aimRadius * aimRadius - aimHorizontal * aimHorizontal)));
-            aimReturn = returnB;
-        }
-        if(aimHorizontal > 0 && aimVertical < 0)
-        {
-            aimPos = new Vector2(Mathf.Sqrt((aimRadius * aimRadius - aimVertical * aimVertical)),
-                -Mathf.Sqrt((aimRadius * aimRadius - aimHorizontal * aimHorizontal)));
-            aimReturn = returnA;
-        }
+
+
+
+
+
 
 
 
@@ -76,17 +80,27 @@ public class AimPoint : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //transform.position = mousePos; //mouse control as a coroutine
-        if (aimVertical == 0 && aimHorizontal == 0)
-        {
-            transform.position = aimReturn.position;
-        }
-        if (aimVertical!=0 || aimHorizontal !=0)
-        {
-            //Stop mouse control coroutine
-            transform.position = aimPos; 
-        }
+        transform.localPosition = position;
+        //transform.position = mousePos; 
+        //mouse control as a coroutine
+                                       //if (Mathf.Approximately(aimVertical, 0) && Mathf.Approximately(aimHorizontal, 0))
+                                       //{
+                                       //    transform.position = aimReturn.position;
+                                       //}
+                                       //if (!Mathf.Approximately(aimVertical, 0) || !Mathf.Approximately(aimHorizontal, 0))
+                                       //{
+                                       //    //Stop mouse control coroutine
+
+
+        //    //transform.position = new Vector2(playerPos.x + lookDirClamped.x,playerPos.y+lookDirClamped.y)*-1;
+        //    transform.position = aimPos;
+        //}
     }
 
-     
+    public static Vector3 GetVectorFromAngle(float angle)
+    {
+        float angleRad = angle * (Mathf.PI / 180f);
+        return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+    }
+
 }

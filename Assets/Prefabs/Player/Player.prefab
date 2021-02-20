@@ -5246,6 +5246,7 @@ MonoBehaviour:
   currentAngle: 0
   player: {fileID: 3013860175405583828}
   mousePos: {x: 0, y: 0, z: 0}
+  aimPoint: {fileID: 0}
 --- !u!114 &3013860175658088931
 MonoBehaviour:
   m_ObjectHideFlags: 0
