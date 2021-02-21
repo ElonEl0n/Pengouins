@@ -119,7 +119,9 @@ public class PlayerController2D : MonoBehaviour
         else if (/*rb2d.velocity.x < -.01 && (facingRight) || */  
             (-180f < Mathf.Round(playerAim.currentAngle) && Mathf.Round(playerAim.currentAngle) < -95f) && (facingRight)
             ||
-            (95f < Mathf.Round(playerAim.currentAngle) && Mathf.Round(playerAim.currentAngle) < 180f) && (facingRight))
+            (95f < Mathf.Round(playerAim.currentAngle) && Mathf.Round(playerAim.currentAngle) < 180f) && (facingRight)
+            ||
+            Input.GetAxis("RightStickHorizontal")<0 && (facingRight))
         {
             Flip(transform);
         }
