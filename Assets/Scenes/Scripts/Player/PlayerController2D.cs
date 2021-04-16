@@ -175,13 +175,13 @@ public class PlayerController2D : MonoBehaviour
                 }
             }
             }
-            
 
+        
 
             if (playerInput.m_right)
             {
                 rb2d.velocity = new Vector2(runSpeed, rb2d.velocity.y);
-                if (isGrounded)
+                if (isGrounded && !isSwimming)
                 {
                     animator.Play("Player_Run");
                 }
@@ -191,7 +191,7 @@ public class PlayerController2D : MonoBehaviour
             else if (playerInput.m_left)
             {
                 rb2d.velocity = new Vector2(-runSpeed, rb2d.velocity.y);
-                if (isGrounded)
+                if (isGrounded && !isSwimming)
                 {
                     animator.Play("Player_Run");
                 }
@@ -199,7 +199,7 @@ public class PlayerController2D : MonoBehaviour
             }
             else
             {
-            if (isGrounded && (!(isLayingEgg)) && !playerDamage.isHit) 
+            if (isGrounded && (!(isLayingEgg)) && !playerDamage.isHit && !isSwimming) 
                 {
                     animator.Play("Player_Idle");
                 }

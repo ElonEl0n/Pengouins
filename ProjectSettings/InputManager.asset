@@ -170,7 +170,7 @@ InputManager:
     descriptiveName: 'Left Bumper '
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 4
+    positiveButton: joystick button 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 10000

@@ -111,7 +111,7 @@
     <Compile Include="Assets\Scenes\Scripts\Player\PlayerInput.cs" />
     <Compile Include="Assets\Scenes\Scripts\Egg\Draft\Egg1\Egg1.cs" />
     <Compile Include="Assets\Scenes\Scripts\Player\Shoot\Impact\Impact.cs" />
-    <Compile Include="Assets\FishBar.cs" />
+    <Compile Include="Assets\Scenes\Scripts\UI\FishBar.cs" />
     <Compile Include="Assets\Scenes\Scripts\UI\HealthBar.cs" />
   </ItemGroup>
   <ItemGroup>
